@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TODO</title>
+	<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="styles/style.css">
+	<style>
+		.done-true {
+			text-decoration: line-through;
+			color: grey;
+		}
+	</style>
+</head>
+<body ng-app="todoApp">
+	<div class="col-md-offset-3 col-md-7">
+		<h2>Todo</h2>
+		<div ng-controller="ForumController as forum">
+			<form class="input-group" novalidate name="gitIssueForm" ng-submit="forum.searchIssues()">
+				<input ng-model="forum.SearchTerm" type="textbox" class="form-control" />
+				<span class="input-group-btn">
+					<button class="btn btn-danger"><i class="fa fa-search"></i>&nbsp;Search</button>
+				</span>
+			</form>
+			<div class="row" ng-show="forum.Issues.length > 0">
+				<div class="col-md-12">
+					<div class="table-responsive">
+						<table class="table table-condensed">
+							<caption>Total Records:- {{ forum.TotalCount}}</caption>
+							<thead>
+								<tr>
+									<th>User</th>
+									<th>Question</th>
+									<th>Status</th>
+									<th>Action</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="data in forum.Issues | limitTo: 10">
+									<td>
+										<a class="thumbnail">
+											<img height="100" width="100" class="img-rectangle" ng-src="{{data.user.avatar_url}}" alt="{{data.user.login}}" />
+											<h4 class="text-success">{{data.user.login}}</h4>
+										</a>
+									</td>
+									<td>
+										<a href="{{data.url}}">{{data.title}}</a>
+									</td>
+									<td>{{data.state}}</td>
+									<td>
+										<a href="{{data.comments_url}}">Click here</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.min.js"></script>
+	<script src="scripts/controller.js"></script>
+</body>
+</html>
